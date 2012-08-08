@@ -1,0 +1,86 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Schedule Creator Help</title>
+
+<?php
+
+$databasefile = "data/coursescheduler";
+
+
+if(! $db_handle = sqlite_open($databasefile, 0666, $sqlite_error) ){
+   echo $sqlite_error;
+	exit;
+    }
+ $query = sqlite_query($db_handle, "SELECT courseID,coursename,semester from courses");
+ $result = sqlite_fetch_all($query);   
+    
+?>
+
+<style type="text/css">
+body{background-color:#CCCC99;font-family:Verdana, Arial, Helvetica, sans-serif;}
+#container{margin:auto; width:800px;background-color:#FFFFFF;padding:15px;}
+.style1{font-size:1.3em;font-weight:bold;margin-bottom:5px;}
+.comment{margin-top:5px;}
+.style2 {color: #CC6600;margin-left:25px;margin-bottom:5px;}
+.style3 {color: #CC6600}
+</style>
+
+</head>
+
+<body>
+<div id="container">
+
+<h2 class="style3">Course Schedule Creator</h2>
+
+<p><b>Overview</b></p>
+
+<p>This web based software is designed to simplify making changes to dates in course calendars. It displays the calendar in a table of rows with each row representing 1 week. The number of weeks displayed is a chosen variable, though a typical Fall or Spring semester is 16 weeks, and Summer semester 8 weeks. Unlimited lessons and assignments with due dates may be added to columns in a given week.</p>
+
+<p>Dates entered for Assignments Due create a stored factor based on the start date of the course. This means all assignments remain the same length of time from the start date no matter what the start date is. Thus changing the start date changes all dates in the calendar.</p>
+
+<p>Changing Semester between Fall & Spring inserts Spring  & Thanksgiving breaks in the proper week and alters all Lesson and Assignment dates accordingly.</p>
+
+<p>Different color schemes can be chosen which alter the styling of the final display.</p>
+
+<h3 class="style3">Course Schedule Creator - the starting page</h3>
+
+There are three options: Create New Course Schedule, Edit Existing Course, Save Schedule of Existing Course as an HTML Page.
+
+<p><b>Create New Course Schedule</b><br>
+Make your selections -all of this can be edited later if necessary.<br>
+</p>
+
+<p>Click Create New Course.<br>
+This will save entered choices to a database and then redirect to the editing page where Lessons and Assignments are added.
+The next time you load the start page your new course will be listed in the drop down lists on this page.</p>
+
+<p><b>Edit Existing Course</b><br>
+Select a course from the list. This will direct you to the editing page for that course.</p>
+
+<p><b>Save Schedule of Existing Course as an HTML File</b><br>
+Select a course from the list. This will create an HTML file on the server of the chosen schedule and return a link to that file.</p>
+
+
+<h3 class="style3">Course Schedule Editing Page</h3>
+<ul>
+<li>This is where all lessons and assignments can be added, deleted, or edited. These are saved as they are made. </li>
+<li>All choices made in the initial set up of the course can be changed. Click Change Course Settings to save.</li>
+<li>It is also possible to save all the data from one course to a New Name. You might do this if you wanted a calendar that was just a little different for some reason. Enter the New Course name and click Save.
+<li>There is an option to add Course Notes. This text will be displayed in a small font size just beneath the course title. </li>
+<li>Course schedules can be shared with other users who have an account. In upper right select user ID from drop down list and click Add User. All users have equal rights.</li>
+
+</ul>
+<h3 class="style3">Using the Finished Schedule</h3>
+<ul><li>Selecting Display Schedule from the top right of Editing page will display the finished styled calendar.</li>
+<li>From your browser click File > Save As  - Change the name to what you want. Remove the .php extension and keep the .html extension.</li>
+<li>This file can now be uploaded to an Angel course and linked to the Calendar Tab. It can be opened in Word and saved as a word document. It can be opened in Dreamweaver and modified further if necessary.</li></ul>
+<strong>Or...</strong>
+<ul><li>From the Options page Save Existing Schedule as an HTML file.</li>
+<li>This will save an HTML file from data of the selected course and give you a URL to that file.</li>
+<li>This file can be downloaded and altered as above.</li></ul>
+
+</div>
+</body>
+</html>
