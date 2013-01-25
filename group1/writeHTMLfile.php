@@ -17,6 +17,8 @@ $fallbreak = $breakweeks[1];
 
 $courseID = $_POST['courseID'];
 
+
+
 $page='
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -26,7 +28,25 @@ $page='
 
 <style type="text/css">
 body{margin:0px;font-family:Verdana, Arial, Helvetica, sans-serif;}
-table { background-color:#FFFFFF; }';
+table { background-color:#FFFFFF; }
+#printlink{
+	border:solid 1px #000;
+	font-size:.8em;
+	float:right;
+	margin:4px 15px;
+	background-color:#ffffff;
+	padding:2px 3px;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+	}
+
+a:link{
+	color:#747474;
+	text-decoration:none;
+	}
+
+';
 
 
 
@@ -142,7 +162,30 @@ body{background-color:#ECE0C8;color:#000000;}
 
 
 
-$page= $page . "</style></head><body>";
+$page= $page . "</style>";
+
+//JAVASCRIPT FOR PRINT WINDOW
+$page= $page . '<SCRIPT LANGUAGE="JAVASCRIPT" TYPE="TEXT/JAVASCRIPT">
+<!--hide script from old browsers
+
+function printWindow(){
+	printWindow=window.open("' . $pageURL . '","printWindow", "width=800,height=500,scrollbars");
+}
+
+function pageLoaded(){
+	if(window.name == "printWindow"){
+	document.getElementById("printlink").innerHTML ="Print This Page";
+	document.getElementById("printlink").href= "javascript:window.print();"
+	}
+}
+
+//-->
+</script>';
+
+
+$page= $page . "</head><body onload=pageLoaded();>";
+
+$page= $page . "<a id='printlink' href='javascript:printWindow()'>Print Friendly Version</a>";
 
 $page= $page .  "<h1 id='coursetitle'>Course Calendar for " . $coursename .  "</h1>";
 
