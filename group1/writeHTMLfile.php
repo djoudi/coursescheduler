@@ -197,7 +197,7 @@ foreach ($db_handle->query("SELECT * from coursenotes WHERE courseID='$courseID'
 
 $page= $page .  "<div id='tableborder'>";
 $page= $page .  "<table  summary='Listing of lessons and due dates of assignments.' width='100%' cellpadding='5' border='0'>";
-$page= $page .  "<tr class='colnames'><th>$col1name</th><th>$col2name</th><th>$col3name</th></tr>";
+$page= $page .  "<tr class='colnames'><th scope='col'>$col1name</th><th scope='col'>$col2name</th><th scope='col'>$col3name</th></tr>";
 for($weekcount=1;$weekcount <= $courselength; $weekcount++){
 	//SHADING FOR ALTERNATING ROWS
 	if ($weekcount % 2 == 0 ){
@@ -206,31 +206,31 @@ for($weekcount=1;$weekcount <= $courselength; $weekcount++){
 		$page= $page .  "<tr>";
 	}
 	//PRINT WEEK DATES
-	//$page= $page .  "<td width='160' valign='top'><b>Week $weekcount</b> <br>$week[$weekcount]</td>";
+	//$page= $page .  "<td width='160' valign='top' scope='row'><b>Week $weekcount</b> <br>$week[$weekcount]</td>";
 	
 	if(($semester=="Spring") && ($weekcount == $springbreak)){
-		$page= $page . "<td width='160' valign='top'><br>$week[$weekcount]</td>";
+		$page= $page . "<td width='160' valign='top' scope='row'><br>$week[$weekcount]</td>";
 		}elseif(($semester=="Spring") && ($weekcount > $springbreak)){
 			$weekadjusted=$weekcount-1;
-			$page= $page . "<td width='160' valign='top'><b>Week $weekadjusted</b> <br>$week[$weekcount]</td>";
+			$page= $page . "<td width='160' valign='top' scope='row'><b>Week $weekadjusted</b> <br>$week[$weekcount]</td>";
 		}elseif(($semester=="Fall") && ($weekcount == $fallbreak)){
-			$page= $page . "<td width='160' valign='top'><br>$week[$weekcount]</td>";
+			$page= $page . "<td width='160' valign='top' scope='row'><br>$week[$weekcount]</td>";
 		}elseif(($semester=="Fall") && ($weekcount> $fallbreak)){
 			$weekadjusted=$weekcount-1;
-			$page= $page . "<td width='160' valign='top'><b>Week $weekadjusted</b><br>$week[$weekcount]</td>";
+			$page= $page . "<td width='160' valign='top' scope='row'><b>Week $weekadjusted</b><br>$week[$weekcount]</td>";
 		}else{
 			$page= $page . "<td width='160' valign='top'><b>Week $weekcount</b> <br>$week[$weekcount]</td>";
 	 }		
 	
 	//PRINT ROW FOR FALL OR SPRING BREAKS
 	if(($semester=="Spring") && ($weekcount== $springbreak)){
-		$page= $page .  "<td width='350'><b>Spring Break!!</b></td><td></td></tr>";
+		$page= $page .  "<td width='220'><b>Spring Break!!</b></td><td></td></tr>";
 	}elseif(($semester=="Fall") && ($weekcount== $fallbreak)){
-		$page= $page .  "<td width='250'><b>Thanksgiving Break!!</b></td><td></td></tr>";
+		$page= $page .  "<td width='220'><b>Thanksgiving Break!!</b></td><td></td></tr>";
 	}else{	
 	
 	//GET LESSON TITLES
-	$page= $page .  "<td width='350' valign='top'>";
+	$page= $page .  "<td width='220' valign='top'>";
 	foreach ($db_handle->query("SELECT * from lessons WHERE courseID='$courseID' AND weeknum='$weekcount'") as $row){
 	$page= $page .  "<div class='title'>" . $row['lessontitle'] . "<div>";
 	if($row['lessoncomment']!="") $page= $page .  "<div class='comment'>" . $row['lessoncomment'] . "</div>";
